@@ -5,6 +5,7 @@ from rest_framework.response import Response
 
 # Project
 from config.response import create_response
+from app.articles.swagger import ArticleSwagger
 from app.articles.serializers import ArticleListSerializer
 
 
@@ -12,6 +13,7 @@ class ArticleViewSet(ViewSet):
     def index(self, request: HttpRequest) -> Response:
         return Response({"hello": "world"})
 
+    @ArticleSwagger.list.swagger
     def list(self, request: HttpRequest) -> Response:
         serializer = ArticleListSerializer()
 
