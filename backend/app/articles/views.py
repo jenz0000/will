@@ -1,6 +1,11 @@
+# System
 from django.http import HttpRequest
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
+
+# Project
+from config.response import create_response
+from app.articles.serializers import ArticleListSerializer
 
 
 class ArticleViewSet(ViewSet):
@@ -8,12 +13,7 @@ class ArticleViewSet(ViewSet):
         return Response({"hello": "world"})
 
     def list(self, request: HttpRequest) -> Response:
-        return Response(
-            {
-                "data": {
-                    "articles": [],
-                },
-                "success": True,
-                "code": 0,
-            }
-        )
+        serializer = ArticleListSerializer()
+
+        articles = serializer.handle()
+        return create_response(data={"articles": articles})

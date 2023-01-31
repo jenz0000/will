@@ -1,0 +1,3 @@
+class CODE:
+    SUCCESS = 0
+    INVALID_PARAMETERS = 1
