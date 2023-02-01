@@ -1,19 +1,9 @@
 # System
 from django.contrib import admin
 from django.urls import path, include, re_path
-from drf_yasg.views import get_schema_view
-from drf_yasg import openapi
 
-schema_view = get_schema_view(
-    openapi.Info(
-        title="Will API Swagger",
-        default_version="v1",
-        description="Will API Swagger",
-        terms_of_service="https://www.google.com/policies/terms/",
-    ),
-    public=True,
-)
-
+# Project
+from config.swagger import schema_view
 
 urlpatterns = [
     path("admin/", admin.site.urls),

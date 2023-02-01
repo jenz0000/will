@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_s3_storage",
     "rest_framework",
     "drf_yasg",
     "corsheaders",
@@ -125,5 +126,13 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CORS_ORIGIN_ALLOW_ALL = True
 
 REST_FRAMEWORK = {
-    "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",)
+    "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
+    "EXCEPTION_HANDLER": "config.exception.exception_handler",
 }
+
+
+STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
+
+AWS_S3_BUCKET_NAME_STATIC = "will-zappa-static"
+AWS_S3_CUSTOM_DOMAIN = f"{AWS_S3_BUCKET_NAME_STATIC}.s3.amazonaws.com"
+STATIC_URL = f"https://{AWS_S3_BUCKET_NAME_STATIC}/"

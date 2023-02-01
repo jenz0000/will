@@ -1,5 +1,17 @@
+# System
 from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
 from drf_yasg.utils import swagger_auto_schema
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="Will API Swagger",
+        default_version="v1",
+        description="Will API Swagger",
+        terms_of_service="https://www.google.com/policies/terms/",
+    ),
+    public=True,
+)
 
 
 class Swagger:
@@ -45,6 +57,4 @@ class Swagger:
 
     @property
     def swagger(self):
-        return swagger_auto_schema(
-            manual_parameters=self.path, request_body=self.req, responses=self.res
-        )
+        return swagger_auto_schema(manual_parameters=self.path, request_body=self.req, responses=self.res)

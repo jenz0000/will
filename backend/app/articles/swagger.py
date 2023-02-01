@@ -1,3 +1,6 @@
+# System
+from drf_yasg import openapi
+
 # Project
 from config.swagger import Swagger
 
@@ -36,6 +39,55 @@ class ArticleSwagger:
                     },
                     "code": 0,
                     "success": True,
+                    "message": "SUCCESS",
+                },
+            },
+        ],
+    )
+
+    create = Swagger(
+        body=[
+            {
+                "name": "title",
+                "type": openapi.TYPE_STRING,
+                "description": "제목",
+            },
+            {
+                "name": "content",
+                "type": openapi.TYPE_STRING,
+                "description": "본문 내용",
+            },
+        ],
+        res=[
+            {
+                "name": "200",
+                "description": "성공",
+                "res": {
+                    "data": {
+                        "article": {
+                            "id": 4,
+                            "created_at": "2023-02-01T09:33:54.511735Z",
+                            "user_id": 7730433416852955556,
+                            "title": "테스트",
+                            "content": "hhhh",
+                            "nickname": "부끄러운 당나귀",
+                            "like_count": 0,
+                            "comment_couunt": 0,
+                        }
+                    },
+                    "code": 0,
+                    "message": "SUCCESS",
+                    "success": True,
+                },
+            },
+            {
+                "name": "400 (1)",
+                "description": "부적절한 파리미터 형태로 요청했을 때",
+                "res": {
+                    "data": {},
+                    "code": 1,
+                    "message": "INVALID_PARAMETERS",
+                    "success": False,
                 },
             },
         ],
