@@ -4,7 +4,6 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import reset from 'styled-reset';
 import router from './router';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
-import './index.css';
 import theme from './theme';
 
 const container = document.getElementById('root')!;
@@ -26,8 +25,6 @@ const queryClient = new QueryClient({
 
 root.render(
 	<QueryClientProvider client={queryClient}>
-		<ThemeProvider theme={theme}>
-			<RouterProvider router={router} />
-		</ThemeProvider>
+		<RouterProvider router={router} />
 	</QueryClientProvider>
 );
