@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import ArticleCard from '../../components/ArticleCard';
 
 const Home = () => {
-	
-
 	return (
-		<main>HOME
-		</main>
+		<>
+			<main className="bg-gray-50 flex flex-col h-screen">
+				{[1, 2, 3, 4].map((_, i) => (
+					<ArticleCard key={i} />
+				))}
+			</main>
+		</>
 	);
 };
-
 
 export default Home;

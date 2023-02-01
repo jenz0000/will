@@ -6,7 +6,7 @@ interface IPostArticleModalProps {
 const PostArticleModal = ({ setOpenPostArticleModal }: IPostArticleModalProps) => {
 	return (
 		<section className="fixed w-screen h-screen bg-black/30 left-0 top-0 flex justify-center items-center">
-			<div className="bg-white border w-5/6 h-5/6 box-border">
+			<div className="bg-white border w-5/6 h-5/6 box-border overflow-y-auto flex flex-col">
 				<div className="flex justify-between items-center border-b h-10 px-3">
 					<span className="text-blue-400 cursor-pointer" onClick={() => setOpenPostArticleModal(false)}>
 						Cancel
@@ -21,7 +21,7 @@ const PostArticleModal = ({ setOpenPostArticleModal }: IPostArticleModalProps) =
 				<div>
 					<input type="textarea" className="border-b w-full px-2 h-12 font-semibold" placeholder="제목" />
 				</div>
-				<textarea className="p-2 w-full h-96 flex grow" placeholder="내용"></textarea>
+				<textarea className="p-2 w-full flex grow" placeholder="내용"></textarea>
 			</div>
 		</section>
 	);

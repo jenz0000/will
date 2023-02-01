@@ -20,8 +20,8 @@ function App() {
 			<Outlet />
 			<FloatingBtn onClick={handleFloatingBtn} />
 			{openPostArticleModal && <PostArticleModal setOpenPostArticleModal={setOpenPostArticleModal} />}
-			<ReactQueryDevtools initialIsOpen={false} />
 			<div onClick={handleFloatingBtn}></div>
+			{/* <ReactQueryDevtools initialIsOpen={false} /> */}
 		</>
 	);
 }
