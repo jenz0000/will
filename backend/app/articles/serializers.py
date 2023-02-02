@@ -33,44 +33,48 @@ class ArticleListSerializer(serializers.Serializer):
 
 
 class ArticleCreateSerializer(serializers.Serializer):
-    title = serializers.CharField()
     content = serializers.CharField()
+
+    book_title = serializers.CharField()
+    book_author = serializers.CharField()
+    book_category = serializers.CharField()
+    book_image_url = serializers.CharField(required=False)
 
     def generate_user_id(self, request: HttpRequest()) -> int:
         ipaddr = get_ip(request)
         user_agent = get_user_agent(request)
 
-        return hash(ipaddr + user_agent)
+        return abs(hash(ipaddr + user_agent))
 
     def generate_nickname(self, user_id: int) -> str:
         # TODO
         return "부끄러운 당나귀"
 
-    def post_article(
-        self,
-        user_id: int,
-        title: str,
-        content: str,
-        nickname: str,
-        request: HttpRequest,
-    ) -> Article:
-        return Article.objects.create(
-            user_id=user_id,
-            title=title,
-            content=content,
-            nickname=nickname,
-        )
+    def post_article(self, article_payload: dict) -> Article:
+        return Article.objects.create(**article_payload)
 
     def handle(self, request) -> dict:
         data = self.data
 
-        title = data.get("title")
         content = data.get("content")
 
+        book_title = data.get("book_title")
+        book_author = data.get("book_author")
+        book_category = data.get("book_category")
+        book_image_url = data.get("book_image_url")
         user_id = self.generate_user_id(request)
         nickname = self.generate_nickname(user_id)
 
-        article = self.post_article(user_id, title, content, nickname, request)
+        article_payload = {
+            "content": content,
+            "user_id": user_id,
+            "book_title": book_title,
+            "book_author": book_author,
+            "book_category": book_category,
+            "book_image_url": book_image_url,
+        }
+
+        article = self.post_article(article_payload)
         serialized_article = ArticleSerializer(article).data
 
         return {"article": serialized_article}

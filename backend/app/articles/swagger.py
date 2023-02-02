@@ -58,16 +58,32 @@ class ArticleSwagger:
     create = Swagger(
         body=[
             {
-                "name": "title",
-                "type": openapi.TYPE_STRING,
-                "description": "제목",
-            },
-            {
                 "name": "content",
                 "type": openapi.TYPE_STRING,
                 "description": "본문 내용",
             },
+            {
+                "name": "book_title",
+                "type": openapi.TYPE_STRING,
+                "description": "책 제목",
+            },
+            {
+                "name": "book_author",
+                "type": openapi.TYPE_STRING,
+                "description": "책 저자",
+            },
+            {
+                "name": "book_category",
+                "type": openapi.TYPE_STRING,
+                "description": "책 카테고리",
+            },
+            {
+                "name": "book_image_url",
+                "type": openapi.TYPE_STRING,
+                "description": "책 이미지 URL",
+            },
         ],
+        required=["content", "book_title", "book_author", "book_category"],
         res=[
             {
                 "name": "200",
@@ -75,14 +91,19 @@ class ArticleSwagger:
                 "res": {
                     "data": {
                         "article": {
-                            "id": 4,
-                            "created_at": "2023-02-01T09:33:54.511735Z",
-                            "user_id": 7730433416852955556,
-                            "title": "테스트",
+                            "id": 6,
+                            "created_at": "2023-02-02T13:00:20.858048Z",
+                            "user_id": 5849203113198067822,
                             "content": "hhhh",
-                            "nickname": "부끄러운 당나귀",
+                            "nickname": "",
                             "like_count": 0,
                             "comment_couunt": 0,
+                            "book": {
+                                "title": "테스트 제목",
+                                "author": "테스트 저자",
+                                "category": "테스트 카테고리",
+                                "image_url": None,
+                            },
                         }
                     },
                     "code": 0,

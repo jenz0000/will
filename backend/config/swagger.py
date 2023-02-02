@@ -15,7 +15,7 @@ schema_view = get_schema_view(
 
 
 class Swagger:
-    def __init__(self, res, path=None, body=None) -> None:
+    def __init__(self, res, path=None, body=None, required=None) -> None:
         self.path = []
         self.body = {}
         self.res = {}
@@ -25,6 +25,9 @@ class Swagger:
 
         if not body:
             body = []
+
+        if not required:
+            required = []
 
         for p in path:
             self.path.append(
@@ -51,7 +54,7 @@ class Swagger:
             )
 
         if body:
-            self.req = openapi.Schema(type=openapi.TYPE_OBJECT, properties=self.body)
+            self.req = openapi.Schema(type=openapi.TYPE_OBJECT, properties=self.body, required=required)
         else:
             self.req = None
 
