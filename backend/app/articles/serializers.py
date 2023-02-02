@@ -13,6 +13,17 @@ class ArticleSerializer(serializers.ModelSerializer):
         model = Article
         exclude = ["updated_at", "is_viewable"]
 
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+
+        data["book"] = {}
+        data["book"]["title"] = data.pop("book_title")
+        data["book"]["author"] = data.pop("book_author")
+        data["book"]["category"] = data.pop("book_category")
+        data["book"]["image_url"] = data.pop("book_image_url")
+
+        return data
+
 
 class ArticleListSerializer(serializers.Serializer):
     def handle(self) -> list:
