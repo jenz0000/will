@@ -7,25 +7,24 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Article',
+            name="Article",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('user_id', models.IntegerField()),
-                ('title', models.CharField(max_length=100)),
-                ('content', models.CharField(max_length=500)),
-                ('nickname', models.CharField(max_length=500)),
-                ('like_count', models.IntegerField(default=0)),
-                ('comment_couunt', models.IntegerField(default=0)),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                ("user_id", models.IntegerField()),
+                ("title", models.CharField(max_length=100)),
+                ("content", models.CharField(max_length=500)),
+                ("nickname", models.CharField(max_length=500)),
+                ("like_count", models.IntegerField(default=0)),
+                ("comment_count", models.IntegerField(default=0)),
             ],
             options={
-                'db_table': 'app_article',
+                "db_table": "app_article",
             },
         ),
     ]

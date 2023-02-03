@@ -22,7 +22,7 @@ class ArticleSwagger:
                                 "content": "할 말이 없습니다. 죄송합니다.",
                                 "nickname": "수줍은 거북이",
                                 "like_count": 0,
-                                "comment_couunt": 0,
+                                "comment_count": 0,
                                 "book": {
                                     "title": "temp-title",
                                     "author": "temp-author",
@@ -37,7 +37,7 @@ class ArticleSwagger:
                                 "content": "강물이 흘러가는구나 내 뼈를 강에 부려다오면목이 없다강물이여 흘러라",
                                 "nickname": "부끄러운 딱다구리",
                                 "like_count": 0,
-                                "comment_couunt": 0,
+                                "comment_count": 0,
                                 "book": {
                                     "title": "title",
                                     "author": "temp-author",
@@ -97,7 +97,7 @@ class ArticleSwagger:
                             "content": "hhhh",
                             "nickname": "",
                             "like_count": 0,
-                            "comment_couunt": 0,
+                            "comment_count": 0,
                             "book": {
                                 "title": "테스트 제목",
                                 "author": "테스트 저자",

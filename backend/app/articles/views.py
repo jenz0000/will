@@ -12,8 +12,7 @@ from app.articles.serializers import ArticleListSerializer, ArticleCreateSeriali
 
 
 class ArticleViewSet(ViewSet):
-    def index(self, request: HttpRequest) -> Response:
-        return Response({"hello": "world"})
+    swagger_tags = ["articles"]
 
     @ArticleSwagger.list.swagger
     def list(self, request: HttpRequest) -> Response:

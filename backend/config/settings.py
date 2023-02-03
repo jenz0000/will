@@ -133,9 +133,15 @@ REST_FRAMEWORK = {
     "EXCEPTION_HANDLER": "config.exception.exception_handler",
 }
 
+SWAGGER_SETTINGS = {
+    "DEFAULT_AUTO_SCHEMA_CLASS": "config.swagger.CustomAutoSchema",
+}
+
 
 STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
 
 AWS_S3_BUCKET_NAME_STATIC = "will-zappa-static"
 AWS_S3_CUSTOM_DOMAIN = f"{AWS_S3_BUCKET_NAME_STATIC}.s3.amazonaws.com"
 STATIC_URL = f"https://{AWS_S3_BUCKET_NAME_STATIC}/"
+
+APPEND_SLASH = False

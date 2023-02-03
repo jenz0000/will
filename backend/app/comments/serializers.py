@@ -1,4 +1,6 @@
 # System
+from django.db.models import F
+from django.db import transaction
 from django.http import HttpRequest
 from rest_framework import serializers
 
@@ -32,3 +34,24 @@ class CommentListSerializer(serializers.Serializer):
             "article": article,
             "comments": comments,
         }
+
+
+class CommentCreateSerializer(serializers.Serializer):
+    article_id = serializers.IntegerField()
+    content = serializers.CharField()
+
+    def handle(self) -> dict:
+        data = self.data
+
+        article_id = data.get("article_id")
+        content = data.get("content")
+
+        article = Article.objects.filter(pk=article_id).first()
+        if not article:
+            raise ApiException(code=CODE.ARTICLE_NOT_FOUND)
+
+        with transaction.atomic():
+            comment = Comment.objects.create(article_id=article_id, content=content)
+            article.change(comment_count=F("comment_count") + 1)
+
+        return {"comment": Commentserializer(comment).data}

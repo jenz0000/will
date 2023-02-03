@@ -10,7 +10,7 @@ class Article(BaseModel):
     content = models.CharField(max_length=500)
     nickname = models.CharField(max_length=500)
     like_count = models.IntegerField(default=0)
-    comment_couunt = models.IntegerField(default=0)
+    comment_count = models.IntegerField(default=0)
     is_viewable = models.BooleanField(default=True)
 
     book_title = models.CharField(max_length=100)
