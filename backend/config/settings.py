@@ -25,11 +25,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # library
     "django_s3_storage",
     "rest_framework",
     "drf_yasg",
     "corsheaders",
+    # app
     "app.articles",
+    "app.comments",
 ]
 
 MIDDLEWARE = [
