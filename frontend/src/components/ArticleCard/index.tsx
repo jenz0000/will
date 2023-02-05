@@ -18,13 +18,14 @@ const ArticleCard = () => {
 					<span className="text-xs">24 k</span>
 					<AiOutlineDislike className="cursor-pointer hover:text-blue-500" />
 				</div>
+
 				<div className="w-11/12 p-2">
 					<header className="flex justify-between  items-center">
 						<span className="text-xs text-gray-400">Psosted by 닉네임 just now</span>
 						<AiOutlineBell size="24" className="text-gray-400" />
 					</header>
 					<h1 className="text-lg font-semibold">Article Title</h1>
-					<article className=" mt-3">
+					<article className="mt-3 overflow-hidden line-clamp-3">
 						Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id quos ex deleniti in hic voluptate tenetur
 						dolore quisquam neque est. Cumque veritatis, deleniti unde in provident facilis corrupti suscipit quae.
 					</article>
