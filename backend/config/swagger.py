@@ -54,7 +54,7 @@ class Swagger:
 
         for b in body:
             self.body[b["name"]] = openapi.Schema(
-                type=openapi.TYPE_STRING,
+                type=b["type"],
                 description=b["description"],
             )
 

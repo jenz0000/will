@@ -16,7 +16,7 @@ class ArticleSwagger:
                     "data": {
                         "articles": [
                             {
-                                "id": 1,
+                                "article_id": 1,
                                 "created_at": "2023-01-31T11:50:56.877932Z",
                                 "user_id": 1,
                                 "content": "할 말이 없습니다. 죄송합니다.",
@@ -31,7 +31,7 @@ class ArticleSwagger:
                                 },
                             },
                             {
-                                "id": 2,
+                                "article_id": 2,
                                 "created_at": "2023-01-31T12:08:25.991079Z",
                                 "user_id": 13,
                                 "content": "강물이 흘러가는구나 내 뼈를 강에 부려다오면목이 없다강물이여 흘러라",
@@ -91,7 +91,7 @@ class ArticleSwagger:
                 "res": {
                     "data": {
                         "article": {
-                            "id": 6,
+                            "article_id": 6,
                             "created_at": "2023-02-02T13:00:20.858048Z",
                             "user_id": 5849203113198067822,
                             "content": "hhhh",

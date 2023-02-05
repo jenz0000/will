@@ -15,7 +15,7 @@ class CommentSwagger:
                 "res": {
                     "data": {
                         "article": {
-                            "id": 1,
+                            "article_id": 1,
                             "created_at": "2023-01-31T11:50:56.877932Z",
                             "user_id": 1,
                             "content": "할 말이 없습니다. 죄송합니다.",
@@ -31,7 +31,7 @@ class CommentSwagger:
                         },
                         "comments": [
                             {
-                                "id": 1,
+                                "comment_id": 1,
                                 "created_at": "2023-02-03T12:18:58.929997Z",
                                 "content": "hohoho",
                             },
@@ -76,7 +76,7 @@ class CommentSwagger:
                 "res": {
                     "data": {
                         "comment": {
-                            "id": 5,
+                            "comment_id": 5,
                             "created_at": "2023-02-03T12:54:51.137138Z",
                             "content": "굳굳!",
                         },

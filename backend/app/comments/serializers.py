@@ -18,6 +18,13 @@ class Commentserializer(serializers.ModelSerializer):
         model = Comment
         exclude = ["updated_at", "is_viewable", "article"]
 
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+
+        data["comment_id"] = data.pop("id")
+
+        return data
+
 
 class CommentListSerializer(serializers.Serializer):
     def handle(self, article_id) -> list:

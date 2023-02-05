@@ -16,6 +16,8 @@ class ArticleSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
 
+        data["article_id"] = data.pop("id")
+
         data["book"] = {}
         data["book"]["title"] = data.pop("book_title")
         data["book"]["author"] = data.pop("book_author")
