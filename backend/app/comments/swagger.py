@@ -108,3 +108,39 @@ class CommentSwagger:
             },
         ],
     )
+
+
+class CommentLikeSwagger:
+    partial_update = Swagger(
+        body=[],
+        required=[],
+        res=[
+            {
+                "name": "200",
+                "description": "성공",
+                "res": {
+                    "data": {
+                        "comment": {
+                            "created_at": "2023-02-03T12:18:58.929997Z",
+                            "content": "hohoho",
+                            "like_count": 3,
+                            "comment_id": 1,
+                        }
+                    },
+                    "code": 0,
+                    "message": "SUCCESS",
+                    "success": True,
+                },
+            },
+            {
+                "name": "400 (1)",
+                "description": "댓글이 존재하지 않을 때",
+                "res": {
+                    "data": {},
+                    "code": 3,
+                    "message": "COMMENT_NOT_FOUND",
+                    "success": False,
+                },
+            },
+        ],
+    )

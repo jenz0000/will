@@ -7,7 +7,7 @@ from rest_framework.response import Response
 # Project
 from config.exception import ApiException
 from config.response import create_response
-from app.articles.swagger import ArticleSwagger
+from app.articles.swagger import ArticleSwagger, ArticleLikeSwagger
 from app.articles.serializers import (
     ArticleListSerializer,
     ArticleCreateSerializer,
@@ -39,6 +39,7 @@ class ArticleViewSet(ViewSet):
 class ArticleLikeViewSet(ViewSet):
     swagger_tags = ["articles"]
 
+    @ArticleLikeSwagger.partial_update.swagger
     def partial_update(self, request: HttpRequest, article_id: int) -> Response:
         serializer = ArticleLikePartialUpdateSerializer(data=request.data)
 

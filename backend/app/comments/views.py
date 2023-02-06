@@ -8,8 +8,12 @@ from rest_framework.response import Response
 from config.constants import CODE
 from config.exception import ApiException
 from config.response import create_response
-from app.comments.swagger import CommentSwagger
-from app.comments.serializers import CommentListSerializer, CommentCreateSerializer
+from app.comments.swagger import CommentSwagger, CommentLikeSwagger
+from app.comments.serializers import (
+    CommentListSerializer,
+    CommentCreateSerializer,
+    CommentLikePartialUpdateSerializer,
+)
 
 
 class CommentViewSet(ViewSet):
@@ -31,3 +35,17 @@ class CommentViewSet(ViewSet):
 
         data = serializer.handle()
         return create_response(data=data, status=status.HTTP_201_CREATED)
+
+
+class CommentLikeViewSet(ViewSet):
+    swagger_tags = ["comments"]
+
+    @CommentLikeSwagger.partial_update.swagger
+    def partial_update(self, request: HttpRequest, comment_id: int) -> Response:
+        serializer = CommentLikePartialUpdateSerializer(data=request.data)
+
+        if not serializer.is_valid():
+            raise ApiException()
+
+        data = serializer.handle(request, comment_id)
+        return create_response(data=data, status=status.HTTP_200_OK)
