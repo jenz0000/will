@@ -1,8 +1,11 @@
 # System
+from django.db.models import F
+from django.db import transaction
 from django.http import HttpRequest
 from rest_framework import serializers
 
 # Project
+from config.constants import CODE
 from config.exception import ApiException
 from config.response import get_ip, get_user_agent
 from app.articles.models import Article
@@ -79,4 +82,18 @@ class ArticleCreateSerializer(serializers.Serializer):
         article = self.post_article(article_payload)
         serialized_article = ArticleSerializer(article).data
 
+        return {"article": serialized_article}
+
+
+class ArticleLikePartialUpdateSerializer(serializers.Serializer):
+    def handle(self, request: HttpRequest, article_id: int) -> dict:
+        article = Article.objects.filter(pk=article_id).first()
+        if not article:
+            raise ApiException(code=CODE.ARTICLE_NOT_FOUND)
+
+        article.change(like_count=F("like_count") + 1)
+
+        article.refresh_from_db()
+
+        serialized_article = ArticleSerializer(article).data
         return {"article": serialized_article}

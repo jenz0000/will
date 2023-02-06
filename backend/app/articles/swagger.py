@@ -123,3 +123,48 @@ class ArticleSwagger:
             },
         ],
     )
+
+
+class ArticleLikeSwagger:
+    partial_update = Swagger(
+        body=[],
+        required=[],
+        res=[
+            {
+                "name": "200",
+                "description": "성공",
+                "res": {
+                    "data": {
+                        "article": {
+                            "created_at": "2023-01-31T11:50:56.877932Z",
+                            "user_id": 1,
+                            "content": "할 말이 없습니다. 죄송합니다.",
+                            "nickname": "수줍은 거북이",
+                            "like_count": 3,
+                            "comment_count": 13,
+                            "article_id": 1,
+                            "book": {
+                                "title": "temp-title",
+                                "author": "temp-author",
+                                "category": "temp-category",
+                                "image_url": "http://books.google.com/books/content?id=N8XyDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+                            },
+                        }
+                    },
+                    "code": 0,
+                    "message": "SUCCESS",
+                    "success": True,
+                },
+            },
+            {
+                "name": "400 (1)",
+                "description": "게시물이 존재하지 않을 때",
+                "res": {
+                    "data": {},
+                    "code": 2,
+                    "message": "ARTICLE_NOT_FOUND",
+                    "success": False,
+                },
+            },
+        ],
+    )
