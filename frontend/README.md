@@ -1,4 +1,7 @@
 # will paper
+- https://ggbc66j5a7.execute-api.ap-northeast-2.amazonaws.com/dev/swagger/  API 명세
+- https://ggbc66j5a7.execute-api.ap-northeast-2.amazonaws.com/dev/admin/ 테스트
+
 
 ## 페이지
 - `/` 메인 페이지 (게시물 list)
@@ -69,24 +72,169 @@ https://ggbc66j5a7.execute-api.ap-northeast-2.amazonaws.com/dev/api/articles
 > ip 와 user-agent 를 바탕으로 익명의 유저 닉네임 생성(ex수줍은 거북이)
 
 ## Model
+#### BASE_URL
+- `ggbc66j5a7.execute-api.ap-northeast-2.amazonaws.com/dev/api`
+### /articles
 
-### article
-- id
-- user_id
-- nickname
-- title
-- content
-- is_secret
-- secret_question
-- secret_answer
-- comment_count
-- like_count
-- created_at
 
-### comment 
-- id
-- user_id
-- nickname
-- content
-- like_count
-- created_at
+> GET /articles   
+
+```
+curl https://ggbc66j5a7.execute-api.ap-northeast-2.amazonaws.com/dev/api/articles
+  \ -X 'GET'
+```
+```json
+{
+  "content-type": "application/json",
+}
+```
+
+```json
+{
+  "data": {
+    "articles": [
+      {
+        "id": 1,
+        "created_at": "2023-01-31T11:50:56.877932Z",
+        "user_id": 1,
+        "content": "할 말이 없습니다. 죄송합니다.",
+        "nickname": "수줍은 거북이",
+        "like_count": 0,
+        "comment_count": 0,
+        "book": {
+          "title": "temp-title",
+          "author": "temp-author",
+          "category": "temp-category",
+          "image_url": "http://books.google.com/books/content?id=N8XyDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        }
+      },
+      {
+        "id": 2,
+        "created_at": "2023-01-31T12:08:25.991079Z",
+        "user_id": 13,
+        "content": "강물이 흘러가는구나 내 뼈를 강에 부려다오면목이 없다강물이여 흘러라",
+        "nickname": "부끄러운 딱다구리",
+        "like_count": 0,
+        "comment_count": 0,
+        "book": {
+          "title": "title",
+          "author": "temp-author",
+          "category": "temp_category",
+          "image_url": "books.google.com/books/content?id=N8XyDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        }
+      }
+    ]
+  },
+  "code": 0,
+  "success": true,
+  "message": "SUCCESS"
+}
+```
+### POST: /comments
+
+```json
+{
+  "content-type": "application/json",
+}
+```
+
+- body 예시
+```json
+{
+  "article_id": "string",
+  "content": "string"
+}
+```
+
+> 성공
+```json
+{
+  "data": {
+    "comment": {
+      "id": 5,
+      "created_at": "2023-02-03T12:54:51.137138Z",
+      "content": "굳굳!"
+    }
+  },
+  "code": 0,
+  "message": "SUCCESS",
+  "success": true
+}
+```
+
+> 실패
+```json
+{
+  "data": {},
+  "code": 2,
+  "message": "ARTICLE_NOT_FOUND",
+  "success": false
+}
+```
+### GET: comments/{article_id}
+
+```
+curl https://ggbc66j5a7.execute-api.ap-northeast-2.amazonaws.com/dev/api/comments/1
+  \ -X 'GET'
+```
+
+```json
+{
+  "data": {
+    "article": {
+      "id": 1,
+      "created_at": "2023-01-31T11:50:56.877932Z",
+      "user_id": 1,
+      "content": "할 말이 없습니다. 죄송합니다.",
+      "nickname": "수줍은 거북이",
+      "like_count": 0,
+      "comment_count": 4,
+      "book": {
+        "title": "temp-title",
+        "author": "temp-author",
+        "category": "temp-category",
+        "image_url": "http://books.google.com/books/content?id=N8XyDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+      }
+    },
+    "comments": [
+      {
+        "id": 1,
+        "created_at": "2023-02-03T12:18:58.929997Z",
+        "user_id": 1,
+        "content": "hohoho"
+      },
+      {
+        "id": 3,
+        "created_at": "2023-02-03T12:53:54.463722Z",
+        "user_id": 1,
+        "content": "인상적입니다."
+      },
+      {
+        "id": 4,
+        "created_at": "2023-02-03T12:54:24.028529Z",
+        "user_id": 1,
+        "content": "인상적입니다."
+      },
+      {
+        "id": 5,
+        "created_at": "2023-02-03T12:54:51.137138Z",
+        "user_id": 1,
+        "content": "굳굳!"
+      }
+    ]
+  },
+  "code": 0,
+  "message": "SUCCESS",
+  "success": true
+}
+```
+> 부적절한 파라미터로 요청시
+
+```json
+{
+  "data": {},
+  "code": 1,
+  "message": "INVALID_PARAMETERS",
+  "success": false
+}
+```
