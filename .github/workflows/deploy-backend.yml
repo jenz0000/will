@@ -28,6 +28,11 @@ jobs:
       run: |
         poetry install --no-root
 
+    - name: Decode .env secret
+      working-directory: backend
+      run: |
+        echo "${{ secrets.DOT_ENV }}" | base64 --decode > .env
+
     - name: Update Zappa Deployment
       working-directory: backend
       env:
