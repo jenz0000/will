@@ -16,6 +16,7 @@ interface IArticle {
 	like_count: number;
 	nickname: string;
 	user_id: number;
+	content: string;
 }
 
 interface IGetArticlesReturn extends IReturn {

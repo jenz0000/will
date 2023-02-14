@@ -1,5 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useState, useEffect } from 'react';
-import { ax } from '../../api/articles';
+import { ax } from '../../api/ax';
 import ArticleCard from '../../components/ArticleCard';
 
 const testObj = {
@@ -15,19 +16,25 @@ const testInput = {
 	content: 'myTestInput',
 };
 const Home = () => {
-	useEffect(() => {
-		const test = async () => {
-			const result = await ax.patchCommentsLike('20');
-			console.log(result.data.comment.like_count);
-		};
-		test();
-	}, []);
+	const { data: articles, isLoading } = useQuery<IArticle[]>(['articles'], () => ax.getArticles(), {
+		onSuccess: (articles) => {
+			console.log(articles);
+		},
+	});
+	// useEffect(() => {
+	// 	const test = async () => {
+	// 		const result = await ax.patchCommentsLike('20');
+	// 		console.log(result.data.comment.like_count);
+	// 	};
+	// 	test();
+	// }, []);
 	// ax.comments('POST', testInput);
+
 	return (
 		<>
 			<main className="bg-gray-50 flex flex-col">
-				{[1, 2, 3, 4].map((_, i) => (
-					<ArticleCard key={i} />
+				{articles?.map((article) => (
+					<ArticleCard key={article.article_id} article={article} />
 				))}
 			</main>
 		</>

@@ -2,7 +2,7 @@ import React from 'react';
 import { AiOutlineComment, AiOutlineDislike, AiOutlineEnter, AiOutlineLike } from 'react-icons/ai';
 import Comment from './Comment';
 
-const Comments = () => {
+const Comments = ({ comments }: { comments?: IComment[] }) => {
 	return (
 		<section className="space-y-8 mt-10">
 			<form className="flex items-center space-x-1 w-auto h-10 border overflow-hidden">
@@ -14,8 +14,8 @@ const Comments = () => {
 					</button>
 				</div>
 			</form>
-			{[1, 2, 3, 4].map((_, i) => (
-				<Comment key={i} />
+			{comments?.map((comment) => (
+				<Comment key={comment.comment_id} comment={comment} />
 			))}
 		</section>
 	);

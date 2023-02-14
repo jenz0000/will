@@ -15,9 +15,9 @@ class Axios {
 		const result = await this.axiosClient.get('/articles').then((res) => res.data);
 
 		if (!result.success) console.log(result.message);
-		return result;
+		return result.data.articles;
 	}
-	async postArticles(newArticle: INewArticle): Promise<IPostArticlesReturn> {
+	async postArticle(newArticle: INewArticle): Promise<IArticle> {
 		const result = await this.axiosClient
 			.post('/articles', newArticle, {
 				headers: {
@@ -28,7 +28,7 @@ class Axios {
 
 		if (!result.success) console.log(result.message);
 
-		return result;
+		return result.data;
 	}
 
 	async patchArticlesLike(articleId: string): Promise<IPetchArticlesLikeReturn> {
@@ -43,11 +43,11 @@ class Axios {
 		return result;
 	}
 
-	async getComments(articleId: string): Promise<IGetCommentsReturn> {
+	async getComments(articleId?: string): Promise<IComment[]> {
 		const result = await this.axiosClient.get(`/comments/${articleId}`).then((res) => res.data);
 
 		if (!result.success) console.log(result.message);
-		return result;
+		return result.data.comments;
 	}
 	async postComments(newComment: any): Promise<IPostCommentsReturn> {
 		const _result = await this.axiosClient

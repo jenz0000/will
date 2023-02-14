@@ -1,28 +1,19 @@
 import React from 'react';
 import { AiOutlineComment, AiOutlineDislike, AiOutlineLike } from 'react-icons/ai';
+import ReactTimeago from 'react-timeago';
 
-const Comment = () => {
+const Comment = ({ comment }: { comment: IComment }) => {
 	return (
 		<section>
 			<div className="flex items-center space-x-2">
-				<div className="w-5 h-5 rounded-full bg-gray-300"></div>
-				<span className="text-xs">Nickname</span>
-				<span className="text-xs text-gray-400">10 hr ago</span>
+				<ReactTimeago className="text-xs text-gray-400" date={comment.created_at} />
 			</div>
-			<main className="text-sm my-3">
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil qui ea officiis voluptates at illo possimus
-				quisquam,
-			</main>
+			<main className="text-sm my-3">{comment.content}</main>
 			<ul className="flex text-gray-500 items-center space-x-3">
-				<li className="flex items-center">
+				<li className="flex items-center space-x-2">
 					<AiOutlineLike size={20} className="cursor-pointer" />
-					<span className="text-xs">{23}</span>
+					<span className="text-xs">{comment.like_count}</span>
 					<AiOutlineDislike size={20} className="cursor-pointer" />
-				</li>
-				<li></li>
-				<li className="flex items-center space-x-1 cursor-pointer">
-					<AiOutlineComment size={20} />
-					<span className="text-xs">Reply</span>
 				</li>
 			</ul>
 		</section>
