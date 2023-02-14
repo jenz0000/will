@@ -7,13 +7,16 @@ from rest_framework.response import Response
 # Project
 from config.exception import ApiException
 from config.response import create_response
-from app.articles.swagger import ArticleSwagger
-from app.articles.serializers import ArticleListSerializer, ArticleCreateSerializer
+from app.articles.swagger import ArticleSwagger, ArticleLikeSwagger
+from app.articles.serializers import (
+    ArticleListSerializer,
+    ArticleCreateSerializer,
+    ArticleLikePartialUpdateSerializer,
+)
 
 
 class ArticleViewSet(ViewSet):
-    def index(self, request: HttpRequest) -> Response:
-        return Response({"hello": "world"})
+    swagger_tags = ["articles"]
 
     @ArticleSwagger.list.swagger
     def list(self, request: HttpRequest) -> Response:
@@ -31,3 +34,17 @@ class ArticleViewSet(ViewSet):
 
         data = serializer.handle(request)
         return create_response(data=data, status=status.HTTP_201_CREATED)
+
+
+class ArticleLikeViewSet(ViewSet):
+    swagger_tags = ["articles"]
+
+    @ArticleLikeSwagger.partial_update.swagger
+    def partial_update(self, request: HttpRequest, article_id: int) -> Response:
+        serializer = ArticleLikePartialUpdateSerializer(data=request.data)
+
+        if not serializer.is_valid():
+            raise ApiException()
+
+        data = serializer.handle(request, article_id)
+        return create_response(data=data, status=status.HTTP_200_OK)

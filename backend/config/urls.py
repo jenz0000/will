@@ -8,6 +8,7 @@ from config.swagger import schema_view
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("app.articles.urls")),
+    path("", include("app.comments.urls")),
 ]
 
 urlpatterns += [

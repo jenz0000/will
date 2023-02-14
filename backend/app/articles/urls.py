@@ -1,8 +1,8 @@
 from django.urls import path
 
-from .views import ArticleViewSet
+from .views import ArticleViewSet, ArticleLikeViewSet
 
 urlpatterns = [
-    path("", ArticleViewSet.as_view({"get": "index"})),
     path("api/articles", ArticleViewSet.as_view({"get": "list", "post": "create"})),
+    path("api/articles/<int:article_id>/like", ArticleLikeViewSet.as_view({"patch": "partial_update"})),
 ]

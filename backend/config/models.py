@@ -7,3 +7,9 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
+
+    def change(self, **kwargs):
+        for field, value in kwargs.items():
+            setattr(self, field, value)
+
+        self.save(update_fields=kwargs)

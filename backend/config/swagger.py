@@ -2,6 +2,17 @@
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from drf_yasg.utils import swagger_auto_schema
+from drf_yasg.inspectors import SwaggerAutoSchema
+
+
+class CustomAutoSchema(SwaggerAutoSchema):
+    def get_tags(self, operation_keys=None):
+        tags = self.overrides.get("tags", None) or getattr(self.view, "swagger_tags", [])
+        if not tags:
+            tags = [operation_keys[0]]
+
+        return tags
+
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -15,7 +26,7 @@ schema_view = get_schema_view(
 
 
 class Swagger:
-    def __init__(self, res, path=None, body=None) -> None:
+    def __init__(self, res, path=None, body=None, required=None) -> None:
         self.path = []
         self.body = {}
         self.res = {}
@@ -25,6 +36,9 @@ class Swagger:
 
         if not body:
             body = []
+
+        if not required:
+            required = []
 
         for p in path:
             self.path.append(
@@ -40,7 +54,7 @@ class Swagger:
 
         for b in body:
             self.body[b["name"]] = openapi.Schema(
-                type=openapi.TYPE_STRING,
+                type=b["type"],
                 description=b["description"],
             )
 
@@ -51,7 +65,7 @@ class Swagger:
             )
 
         if body:
-            self.req = openapi.Schema(type=openapi.TYPE_OBJECT, properties=self.body)
+            self.req = openapi.Schema(type=openapi.TYPE_OBJECT, properties=self.body, required=required)
         else:
             self.req = None
 
